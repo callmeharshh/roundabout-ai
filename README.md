@@ -15,6 +15,8 @@ The key is read only by server-side routes. `.env.local` is ignored by Git. `OPE
 
 Production site: https://roundabout-ai.netlify.app/ Netlify detects the Next.js App Router and uses its maintained Next.js runtime automatically.
 
+<img width="2560" height="1438" alt="image" src="https://github.com/user-attachments/assets/088a821a-9a33-4485-9717-4ee751930eb5" />
+
 To enable live AI in production, revoke any key that has been pasted into chat, create a replacement, then add `OPENAI_API_KEY` as a **secret environment variable** in Netlify at **Site configuration → Environment variables**. Redeploy after setting it. Never put the value in this repository or a deploy command. Until configured, the clearly labeled backup host and judge keep the game playable.
 
 ## Demo flow
