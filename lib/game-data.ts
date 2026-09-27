@@ -9,6 +9,7 @@ export type Player = {
   funFacts: string[];
   score: number;
   profileMemory: string[];
+  sessionMemory: string[];
   behavioralMemory: string[];
 };
 
@@ -46,7 +47,8 @@ export const mockPlayers: Player[] = [
     funFacts: ['Can identify a movie by a single sound effect.', 'Keeps a spreadsheet of favorite snacks.'],
     score: 14,
     profileMemory: ['Loves weird prompts with category twists.', 'Acts competitive when the host is dramatic.'],
-    behavioralMemory: ['Writes short but devastatingly clever lines.'],
+    sessionMemory: ['Round 1: landed a sharp, dry one-liner with precise shutdown energy.', 'Round 2: used an emotional metaphor that made the host laugh.'],
+    behavioralMemory: ['Writes short but devastatingly clever lines.', 'Often turns emotional stakes into a joke without losing the punch.'],
   },
   {
     id: 'p2',
@@ -59,7 +61,8 @@ export const mockPlayers: Player[] = [
     funFacts: ['Has a 10-song playlist for every mood.', 'Claims she can bluff at poker with a straight face.'],
     score: 19,
     profileMemory: ['Prefers answers that feel cinematic.', 'Will absolutely weaponize a metaphor.'],
-    behavioralMemory: ['Gets louder when the room is watching.'],
+    sessionMemory: ['Round 1: delivered a cleaner, more theatrical voice.', 'Round 2: leaned into public transit chaos and crowd energy.'],
+    behavioralMemory: ['Gets louder when the room is watching.', 'Builds big, cinematic metaphors and strong final twists.'],
   },
   {
     id: 'p3',
@@ -72,7 +75,8 @@ export const mockPlayers: Player[] = [
     funFacts: ['Knows the origin of 200 online phrases.', 'Can name five breakfast cereals from memory.'],
     score: 12,
     profileMemory: ['Will go for absurdity over polish.', 'Likes topical references when they land.'],
-    behavioralMemory: ['Paces before submitting a high-risk answer.'],
+    sessionMemory: ['Round 1: pushed absurdity over precision and won the room.', 'Round 2: overperformed on theatrical voice but missed the last beat.'],
+    behavioralMemory: ['Paces before submitting a high-risk answer.', 'Favors outrageous premises and playful chaos.'],
   },
 ];
 

@@ -474,6 +474,11 @@ button:disabled {
   margin-top: 16px;
 }
 
+button.secondary-btn {
+  cursor: pointer;
+  border: none;
+}
+
 .host-message {
   background: linear-gradient(135deg, rgba(157, 123, 255, 0.12), rgba(79, 227, 255, 0.08));
   border: 1px solid rgba(157, 123, 255, 0.3);
