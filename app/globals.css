@@ -1058,3 +1058,170 @@ button.secondary-btn {
     width: 100%;
   }
 }
+
+.room-mode-panel {
+  display: grid;
+  gap: 16px;
+  margin: 0 0 22px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: rgba(17, 22, 34, 0.9);
+}
+
+.room-mode-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.room-mode-header h2 {
+  margin: 8px 0 0;
+  font-size: 1.8rem;
+}
+
+.room-mode-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(115, 224, 208, 0.35);
+  background: rgba(115, 224, 208, 0.08);
+  color: var(--cyan);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.room-mode-switcher {
+  display: inline-flex;
+  width: fit-content;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+}
+
+.room-mode-switcher button {
+  border: 0;
+  border-radius: 9px;
+  padding: 8px 14px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.room-mode-switcher button.active {
+  background: rgba(247, 215, 116, 0.12);
+  color: var(--gold);
+}
+
+.room-code-box {
+  display: grid;
+  gap: 6px;
+  padding: 18px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(157, 123, 255, 0.13), rgba(79, 227, 255, 0.08));
+  border: 1px solid rgba(157, 123, 255, 0.28);
+}
+
+.room-code-box span,
+.room-code-box small {
+  color: var(--muted);
+}
+
+.room-code-box strong {
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: 0.18em;
+  color: var(--gold);
+}
+
+.room-join-field,
+.room-host-field {
+  margin: 0;
+}
+
+.guide-card {
+  display: grid;
+  gap: 18px;
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 209, 102, 0.28);
+  background: linear-gradient(135deg, rgba(255, 209, 102, 0.08), rgba(115, 224, 208, 0.05));
+}
+
+.guide-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.guide-header h3 {
+  margin: 10px 0 0;
+  font-size: 1.25rem;
+}
+
+.guide-eyebrow {
+  border-color: rgba(255, 209, 102, 0.35);
+  color: var(--gold);
+  background: rgba(255, 209, 102, 0.08);
+}
+
+.guide-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: rgba(17, 22, 34, 0.75);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.guide-progress {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.guide-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--gold), var(--cyan));
+}
+
+.guide-content {
+  display: grid;
+  gap: 10px;
+}
+
+.guide-content strong {
+  font-size: 1.08rem;
+}
+
+.guide-content p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.guide-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.guide-actions .primary-btn,
+.guide-actions .secondary-btn {
+  width: auto;
+}

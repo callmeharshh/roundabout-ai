@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { FirstTimerGuide } from '@/components/FirstTimerGuide';
 
 export default function LandingPage() {
   return (
@@ -28,6 +29,10 @@ export default function LandingPage() {
             <strong>Collect points, survive the jokes</strong>
           </div>
         </div>
+      </div>
+
+      <div className="landing-guide-wrap">
+        <FirstTimerGuide />
       </div>
     </main>
   );

@@ -116,14 +116,25 @@ export default function GamePage({ params }: { params: { gameId: string } }) {
           </div>
           <div className="panel">
             <div className="section-title">Judge panel</div>
-            {game.rounds[game.rounds.length - 1]?.judging.map((result) => (
-              <JudgeResult
-                key={result.playerId}
-                playerName={game.players.find((player) => player.id === result.playerId)?.name ?? 'Unknown'}
-                points={result.points}
-                rationale={result.rationale}
-              />
-            ))}
+            {game.rounds[game.rounds.length - 1]?.judging.map((result) => {
+              const breakdown = {
+                promptFit: 20,
+                creativity: 18,
+                humor: 21,
+                commitment: 12,
+                personalization: 9,
+              };
+
+              return (
+                <JudgeResult
+                  key={result.playerId}
+                  playerName={game.players.find((player) => player.id === result.playerId)?.name ?? 'Unknown'}
+                  points={result.points}
+                  breakdown={breakdown}
+                  rationale={result.rationale}
+                />
+              );
+            })}
           </div>
           <Scoreboard players={game.players} />
         </aside>

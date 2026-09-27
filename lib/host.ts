@@ -36,6 +36,20 @@ export type RoundHistoryItem = {
 
 export type AnswerMap = Record<string, string>;
 
+export type HostPlayerRead = {
+  playerId: string;
+  read: string;
+};
+
+export type HostIntroduction = {
+  hostGreeting: string;
+  profileRead: string;
+  playerReads: HostPlayerRead[];
+  category: string;
+  prompt: string;
+  usedFallback: boolean;
+};
+
 const FALLBACK_CATEGORIES = [
   'Household Chaos',
   'Future Bureaucracy',
@@ -293,6 +307,44 @@ export class HostService {
 }
 
 export const hostService = new HostService();
+
+export async function createHostIntroduction(players: PlayerContext[]): Promise<HostIntroduction> {
+  const safePlayers = players.length > 0 ? players : [{
+    id: 'fallback-player',
+    name: 'The room',
+    interests: ['chaos'],
+    humorStyle: 'chaotic',
+  }];
+
+  const round = hostService.generateRound(safePlayers, 1, []);
+  const reads = safePlayers.map((player) => ({
+    playerId: player.id,
+    read: `${player.name} brings ${player.interests.slice(0, 2).join(' and ')} energy with a ${player.humorStyle.toLowerCase()} sense of humor.`,
+  }));
+
+  return {
+    hostGreeting: `Alright, ${safePlayers[0]?.name ?? 'friend'}, let’s meet the room and find the chaos we can turn into a killer challenge.`,
+    profileRead: `The room is a ${round.category.toLowerCase()} crowd, with a little bit of nonsense, a little bit of strategy, and exactly enough confidence to make this embarrassing in the best possible way.`,
+    playerReads: reads,
+    category: round.category,
+    prompt: round.prompt,
+    usedFallback: false,
+  };
+}
+
+export async function createNextRound(session: { players: PlayerContext[]; roundNumber: number; rounds: Array<{ prompt?: string; winner?: string }> }): Promise<{ category: string; prompt: string; memoryCallout: string; hostGreeting: string }> {
+  const round = hostService.generateRound(session.players, session.roundNumber + 1, session.rounds.map((roundItem) => ({
+    prompt: roundItem.prompt,
+    winner: roundItem.winner,
+  })));
+
+  return {
+    category: round.category,
+    prompt: round.prompt,
+    memoryCallout: `The host is leaning into ${round.category.toLowerCase()} energy and the room’s strongest comedic instincts.`,
+    hostGreeting: `Round ${session.roundNumber + 1} is live — the room is primed for another ridiculous, confidence-heavy challenge.`,
+  };
+}
 
 function safePlayersToIds(players: PlayerContext[]): string[] {
   return players.filter(Boolean).map((player) => player.id);

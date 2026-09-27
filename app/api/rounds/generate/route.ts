@@ -53,6 +53,7 @@ export async function POST(request: Request) {
     ...profile,
     score: 0,
     profileMemory: [],
+    sessionMemory: [],
     behavioralMemory: [],
   }));
 

@@ -3,7 +3,7 @@ import type { ScoreBreakdown } from '@/lib/judge';
 type JudgeResultProps = {
   playerName: string;
   points: number;
-  breakdown: ScoreBreakdown;
+  breakdown?: ScoreBreakdown;
   rationale: string;
 };
 
@@ -16,6 +16,14 @@ export function JudgeResult({ playerName, points, breakdown, rationale }: JudgeR
     ['personalization', 'Personalization'],
   ];
 
+  const safeBreakdown: ScoreBreakdown = breakdown ?? {
+    promptFit: 0,
+    creativity: 0,
+    humor: 0,
+    commitment: 0,
+    personalization: 0,
+  };
+
   return (
     <div className="judge-box">
       <div className="player-row">
@@ -26,7 +34,7 @@ export function JudgeResult({ playerName, points, breakdown, rationale }: JudgeR
         {rubricLabels.map(([key, label]) => (
           <div key={key} style={{ display: 'flex', justifyContent: 'space-between', gap: 6 }}>
             <span>{label}</span>
-            <strong>{breakdown[key]}/{key === 'commitment' ? 15 : key === 'personalization' ? 10 : 25}</strong>
+            <strong>{safeBreakdown[key]}/{key === 'commitment' ? 15 : key === 'personalization' ? 10 : 25}</strong>
           </div>
         ))}
       </div>

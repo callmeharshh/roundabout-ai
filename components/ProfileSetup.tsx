@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ROOM_STORAGE_KEY, type Player } from '@/lib/game-data';
 import type { HostIntroduction } from '@/lib/host';
 import { createInitialSession } from '@/lib/game-session';
+import { createRoomSession } from '@/lib/room-session';
 
 type ProfileDraft = {
   id: string;
@@ -58,6 +59,7 @@ function toPlayers(profiles: ProfileDraft[], introduction: HostIntroduction): Pl
     funFacts: profile.funFact.trim() ? [profile.funFact.trim()] : [],
     score: 0,
     profileMemory: introduction.playerReads.find((read) => read.playerId === profile.id)?.read ? [introduction.playerReads.find((read) => read.playerId === profile.id)!.read] : [],
+    sessionMemory: [],
     behavioralMemory: [],
   }));
 }
@@ -69,6 +71,30 @@ export function ProfileSetup() {
   const [introduction, setIntroduction] = useState<HostIntroduction | null>(null);
   const [isReading, setIsReading] = useState(false);
   const [error, setError] = useState('');
+  const [roomCode, setRoomCode] = useState<string>('');
+  const [hostName, setHostName] = useState('You');
+  const [meetingMode, setMeetingMode] = useState<'invite' | 'join'>('invite');
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('prompt-roulette-room-v1');
+      if (!saved) {
+        const room = createRoomSession(hostName || 'You');
+        setRoomCode(room.roomCode);
+        localStorage.setItem('prompt-roulette-room-v1', JSON.stringify(room));
+        return;
+      }
+
+      const parsed = JSON.parse(saved) as { roomCode?: string };
+      if (parsed.roomCode) {
+        setRoomCode(parsed.roomCode);
+      }
+    } catch {
+      const room = createRoomSession(hostName || 'You');
+      setRoomCode(room.roomCode);
+      localStorage.setItem('prompt-roulette-room-v1', JSON.stringify(room));
+    }
+  }, [hostName]);
 
   function updateProfile(id: string, key: keyof ProfileDraft, value: string) {
     setProfiles((current) => current.map((profile) => profile.id === id ? { ...profile, [key]: value } : profile));
@@ -127,8 +153,13 @@ export function ProfileSetup() {
     if (!introduction) return;
     const players = toPlayers(profiles, introduction);
     localStorage.setItem(ROOM_STORAGE_KEY, JSON.stringify(createInitialSession(players, introduction)));
-    router.push('/game/your-room');
+    router.push('/game/demo-room');
   }
+
+  const roomSummary = useMemo(() => {
+    if (!roomCode) return 'Create room';
+    return `Room ${roomCode}`;
+  }, [roomCode]);
 
   return (
     <main className="lobby-shell setup-page">
@@ -136,12 +167,46 @@ export function ProfileSetup() {
         <div className="brand-pill"><span className="brand-dot" />Prompt Roulette</div>
         <span className="setup-progress">{introduction ? 'STEP 2 OF 2' : 'STEP 1 OF 2'}</span>
       </div>
+
       <header className="setup-heading">
         <div className="eyebrow">STEP 1 OF 2 · QUICK VIBE CHECK</div>
         <h1>Let the host meet your group.</h1>
-        <p>Add 2-4 players. Just name, one interest, and joke style. The rest is bonus lore.</p>
+        <p>Invite friends into your room with a meeting code, then keep the game centered on one player screen while everyone joins from the same room.</p>
         <button className="demo-crew-btn" type="button" onClick={loadDemoCrew}>Use a ready-made demo crew</button>
       </header>
+
+      <div className="room-mode-panel">
+        <div className="room-mode-header">
+          <div>
+            <span className="eyebrow">Room setup</span>
+            <h2>{roomSummary}</h2>
+          </div>
+          <span className="room-mode-pill">{meetingMode === 'invite' ? 'Invite friends' : 'Join room'}</span>
+        </div>
+
+        <div className="room-mode-switcher">
+          <button type="button" className={meetingMode === 'invite' ? 'active' : ''} onClick={() => setMeetingMode('invite')}>Create room</button>
+          <button type="button" className={meetingMode === 'join' ? 'active' : ''} onClick={() => setMeetingMode('join')}>Use room code</button>
+        </div>
+
+        {meetingMode === 'invite' ? (
+          <div className="room-code-box">
+            <span>Meeting code</span>
+            <strong>{roomCode || 'GENERATING...'}</strong>
+            <small>Share this with everyone on the call so they can join the same game room.</small>
+          </div>
+        ) : (
+          <label className="profile-field room-join-field">
+            Enter room code
+            <input className="input" value={roomCode} onChange={(event) => setRoomCode(event.target.value.toUpperCase())} placeholder="ABC123" maxLength={6} />
+          </label>
+        )}
+
+        <label className="profile-field room-host-field">
+          Host name
+          <input className="input" value={hostName} onChange={(event) => setHostName(event.target.value)} placeholder="You" maxLength={24} />
+        </label>
+      </div>
 
       {!introduction ? (
         <>
