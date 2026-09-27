@@ -13,7 +13,7 @@ The key is read only by server-side routes. `.env.local` is ignored by Git. `OPE
 
 ## Netlify deployment
 
-Production site: https://prompt-roulette-harsh.netlify.app. Netlify detects the Next.js App Router and uses its maintained Next.js runtime automatically.
+Production site: https://roundabout-ai.netlify.app/ Netlify detects the Next.js App Router and uses its maintained Next.js runtime automatically.
 
 To enable live AI in production, revoke any key that has been pasted into chat, create a replacement, then add `OPENAI_API_KEY` as a **secret environment variable** in Netlify at **Site configuration → Environment variables**. Redeploy after setting it. Never put the value in this repository or a deploy command. Until configured, the clearly labeled backup host and judge keep the game playable.
 
