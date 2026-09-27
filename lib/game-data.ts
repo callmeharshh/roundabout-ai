@@ -2,6 +2,9 @@ export type Player = {
   id: string;
   name: string;
   interests: string[];
+  favorites: string[];
+  preferredTopics: string[];
+  avoidedTopics: string[];
   humorStyle: string;
   funFacts: string[];
   score: number;
@@ -36,6 +39,9 @@ export const mockPlayers: Player[] = [
     id: 'p1',
     name: 'Ari',
     interests: ['tech', 'chaos', 'midnight snacks'],
+    favorites: ['Formula 1', 'The Office'],
+    preferredTopics: ['snacks', 'clever twists'],
+    avoidedTopics: [],
     humorStyle: 'dry sarcasm',
     funFacts: ['Can identify a movie by a single sound effect.', 'Keeps a spreadsheet of favorite snacks.'],
     score: 14,
@@ -46,6 +52,9 @@ export const mockPlayers: Player[] = [
     id: 'p2',
     name: 'Mina',
     interests: ['design', 'music', 'storytelling'],
+    favorites: ['Studio Ghibli', 'indie pop'],
+    preferredTopics: ['music', 'big feelings'],
+    avoidedTopics: [],
     humorStyle: 'whimsical chaos',
     funFacts: ['Has a 10-song playlist for every mood.', 'Claims she can bluff at poker with a straight face.'],
     score: 19,
@@ -56,6 +65,9 @@ export const mockPlayers: Player[] = [
     id: 'p3',
     name: 'Jules',
     interests: ['food', 'games', 'meme history'],
+    favorites: ['Mario Kart', 'breakfast cereal'],
+    preferredTopics: ['food', 'internet lore'],
+    avoidedTopics: [],
     humorStyle: 'chaotic energy',
     funFacts: ['Knows the origin of 200 online phrases.', 'Can name five breakfast cereals from memory.'],
     score: 12,
@@ -111,5 +123,7 @@ export const mockGame: Game = {
   ],
   createdAt: new Date().toISOString(),
 };
+
+export const ROOM_STORAGE_KEY = 'prompt-roulette-room-v1';
 
 export const getGameById = (id: string): Game => mockGame;

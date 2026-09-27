@@ -11,8 +11,8 @@ export function RoundPrompt({ category, prompt, roundNumber }: RoundPromptProps)
       <h2>{prompt}</h2>
       <p>{category}</p>
       <div className="round-meta">
-        <span className="meta-chip">Category: {category}</span>
-        <span className="meta-chip">Answer in one truth bomb</span>
+        <span className="meta-chip">One answer each</span>
+        <span className="meta-chip">Specific beats long</span>
       </div>
     </div>
   );

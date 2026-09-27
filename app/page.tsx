@@ -7,26 +7,25 @@ export default function LandingPage() {
         <div className="eyebrow">Roundabout AI</div>
         <h1>Prompt Roulette</h1>
         <p className="lede">
-          A neon-lit game show where your weirdest, funniest, and most chaotic answers win the crowd.
+          Tell the host what your group loves. It will make a ridiculous challenge from your interests, then judge the chaos.
         </p>
 
         <div className="cta-row">
-          <Link href="/lobby" className="primary-btn">Start a game</Link>
-          <Link href="/game/demo-room" className="secondary-btn">View demo round</Link>
+          <Link href="/lobby" className="primary-btn">Set up our players</Link>
         </div>
 
         <div className="feature-grid">
           <div className="feature-card">
-            <span>2-4 players</span>
-            <strong>Quick party chaos</strong>
+            <span>First: the vibe check</span>
+            <strong>Tell the host what you like</strong>
           </div>
           <div className="feature-card">
-            <span>Live judging</span>
-            <strong>Host commentary</strong>
+            <span>Then: your kind of weird</span>
+            <strong>Get a prompt made for your group</strong>
           </div>
           <div className="feature-card">
-            <span>Points, jokes</span>
-            <strong>Final showdown</strong>
+            <span>Finally: defend your answer</span>
+            <strong>Collect points, survive the jokes</strong>
           </div>
         </div>
       </div>

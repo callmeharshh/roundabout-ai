@@ -1,6 +1,6 @@
 type GameHeaderProps = {
   roundNumber: number;
-  maxRounds: number;
+  maxRounds?: number;
   hostState: string;
   title?: string;
 };
@@ -13,7 +13,7 @@ export function GameHeader({ roundNumber, maxRounds, hostState, title = 'Prompt 
         {title}
       </div>
       <div className="host-badge">Host: {hostState}</div>
-      <div className="meta-chip">Round {roundNumber}/{maxRounds}</div>
+      <div className="meta-chip">{maxRounds ? `Round ${roundNumber}/${maxRounds}` : `Round ${roundNumber}`}</div>
     </header>
   );
 }
